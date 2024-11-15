@@ -11,5 +11,4 @@ const router = (app) => {
     app.get('/maker', controllers.Domo.makerPage);
     app.get('/', controllers.Account.loginPage);
 };
-
 module.exports = router;
