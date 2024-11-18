@@ -1,13 +1,10 @@
 const models = require('../models');
-const Account = models.Account;
 
-const loginPage = (req, res) => {
-  return res.render('login');
-};
+const { Account } = models;
 
-const signupPage = (req, res) => {
-  return res.render('signup');
-};
+const loginPage = (req, res) => res.render('login');
+
+const signupPage = (req, res) => res.render('signup');
 
 const logout = (req, res) => {
   req.session.destroy();
@@ -52,8 +49,7 @@ const signup = async (req, res) => {
     await newAccount.save();
     req.session.account = Account.toAPI(newAccount);
     return res.json({ redirect: '/maker' });
-  }
-  catch (err) {
+  } catch (err) {
     console.log(err);
     if (err.code === 11000) {
       return res.status(400).json({ error: 'Username is already in use!' });
